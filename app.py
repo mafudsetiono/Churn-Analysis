@@ -26,7 +26,7 @@ st.sidebar.title("📌 Mode Selection")
 
 mode = st.sidebar.radio(
     "Choose Mode:",
-    ["Single Prediction", "Batch Prediction", "Impact Simulator", "Dashboard"]
+    ["Single Prediction", "Batch Prediction", "Dashboard"]
 )
 
 # MODE ROUTING
@@ -215,16 +215,202 @@ if mode == "Single Prediction":
 
 
 elif mode == "Batch Prediction":
+
     st.title("📂 Batch Prediction")
 
-    st.write("Upload CSV file for bulk churn prediction.")
+    uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 
-elif mode == "Impact Simulator":
-    st.title("💰 Impact Simulator")
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file)
 
-    st.write("Simulate financial impact of churn prevention strategy.")
+        st.write("Preview Data:")
+        st.dataframe(df.head())
+        required_features = [
+            "International plan",
+            "Voice mail plan",
+            "Customer service calls",
+            "Total day charge",
+            "Total eve charge"
+        ]
+
+        df_model = df[required_features].copy()
+
+        # Encoding
+        df_model["International plan"] = df_model["International plan"].map({"Yes":1, "No":0})
+        df_model["Voice mail plan"] = df_model["Voice mail plan"].map({"Yes":1, "No":0})
+
+        # Scaling
+        df_scaled = scaler.transform(df_model)
+
+        # Predict probability
+        probabilities = model.predict_proba(df_scaled)[:,1]
+
+        df["Churn Probability"] = probabilities
+
+        loss_per_customer = 50
+        intervention_cost = 10
+        success_rate = 0.8
+
+        df["Expected Loss"] = df["Churn Probability"] * loss_per_customer
+        df["Expected Saved"] = df["Churn Probability"] * success_rate * loss_per_customer
+        df["Net Benefit"] = df["Expected Saved"] - intervention_cost
+
+        # Retention Priority
+        conditions = [
+            df["Net Benefit"] > 20,
+            df["Net Benefit"] > 0
+        ]
+
+        choices = [
+            "Priority 1 - Immediate",
+            "Priority 2 - Strategic"
+        ]
+
+        df["Retention Priority"] = np.select(
+            conditions,
+            choices,
+            default="Priority 3 - Low"
+        )
+        # Sort by Net Benefit   
+        df_sorted = df.sort_values(by="Net Benefit", ascending=False)
+
+        st.subheader("📊 Retention Ranking")
+        st.dataframe(df_sorted.head(10))
+
 
 elif mode == "Dashboard":
-    st.title("📊 Churn Analytics Dashboard")
 
-    st.write("Overview of churn insights and model performance.")
+    st.title("📊 Churn Risk Dashboard")
+
+    # Load Dataset
+    df = pd.read_csv("data/churn-bigml-20.csv")
+
+    required_features = [
+        "International plan",
+        "Voice mail plan",
+        "Customer service calls",
+        "Total day charge",
+        "Total eve charge"
+    ]
+
+    df_model = df[required_features].copy()
+
+    # Encoding
+    df_model["International plan"] = df_model["International plan"].map({"Yes":1, "No":0})
+    df_model["Voice mail plan"] = df_model["Voice mail plan"].map({"Yes":1, "No":0})
+
+    # Scaling
+    df_scaled = scaler.transform(df_model)
+
+    # Predict Probability
+    probabilities = model.predict_proba(df_scaled)[:,1]
+    df["Churn Probability"] = probabilities
+
+    # Financial Assumptions
+    loss_per_customer = 50
+    intervention_cost = 10
+    success_rate = 0.8
+
+    df["Expected Loss"] = df["Churn Probability"] * loss_per_customer
+    df["Expected Saved"] = df["Churn Probability"] * success_rate * loss_per_customer
+    df["Net Benefit"] = df["Expected Saved"] - intervention_cost
+
+    # Retention Priority
+    conditions = [
+        df["Net Benefit"] > 20,
+        df["Net Benefit"] > 0
+    ]
+
+    choices = [
+        "Priority 1",
+        "Priority 2"
+    ]
+
+    df["Retention Priority"] = np.select(
+        conditions,
+        choices,
+        default="Priority 3"
+    )
+
+    # Executive KPIs
+    st.subheader("📌 Executive Overview")
+
+    total_customers = len(df)
+    avg_prob = df["Churn Probability"].mean()
+    total_expected_loss = df["Expected Loss"].sum()
+    total_potential_saving = df[df["Net Benefit"] > 0]["Net Benefit"].sum()
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    col1.metric("Total Customers", total_customers)
+    col2.metric("Avg Churn Probability", f"{avg_prob*100:.2f}%")
+    col3.metric("Total Expected Loss", f"$ {total_expected_loss:,.2f}")
+    col4.metric("Total Potential Saving", f"$ {total_potential_saving:,.2f}")
+
+    st.divider()
+
+    # Risk Distribution
+    st.subheader("📊 Risk Distribution")
+
+    risk_bins = pd.cut(
+        df["Churn Probability"],
+        bins=[0, 0.4, 0.75, 1],
+        labels=["Low", "Medium", "High"]
+    )
+
+    risk_counts = risk_bins.value_counts().sort_index()
+
+    st.bar_chart(risk_counts)
+
+    st.divider()
+
+    # Top Retention Targets
+    st.subheader("🚨 Top Retention Targets")
+
+    df_top = df.sort_values(by="Net Benefit", ascending=False).head(10)
+
+    st.dataframe(
+        df_top[[
+            "Churn Probability",
+            "Expected Loss",
+            "Net Benefit",
+            "Retention Priority"
+        ]]
+    )
+
+    st.divider()
+
+    # Executive Summary
+    st.subheader("📌 Executive Summary")
+
+    high_risk_count = (df["Retention Priority"] == "Priority 1").sum()
+    medium_risk_count = (df["Retention Priority"] == "Priority 2").sum()
+
+    st.write(f"""
+    - The portfolio consists of **{total_customers} customers**.
+    - The average churn probability is **{avg_prob*100:.2f}%**, indicating moderate overall churn risk.
+    - Estimated total potential revenue loss is **${total_expected_loss:,.2f}**.
+    - Targeted intervention could generate up to **${total_potential_saving:,.2f} in net benefit**.
+    - **{high_risk_count} customers** require immediate retention action.
+    - **{medium_risk_count} customers** qualify for strategic intervention.
+    """)
+
+    st.divider()
+
+    st.subheader("🎯 Recommended Action Plan")
+
+    st.markdown("""
+    ### 🔴 Priority 1 – Immediate Action
+    - Launch personalized retention offers.
+    - Assign senior customer service representatives.
+    - Offer discount or loyalty incentives.
+
+    ### 🟠 Priority 2 – Strategic Engagement
+    - Run targeted engagement campaigns.
+    - Monitor behavior closely for next 30 days.
+    - Provide value-based communication.
+
+    ### 🟢 Priority 3 – Maintain & Monitor
+    - Maintain service quality.
+    - No immediate financial intervention required.
+    """)
