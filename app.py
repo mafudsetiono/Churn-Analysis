@@ -26,7 +26,7 @@ st.sidebar.title("📌 Mode Selection")
 
 mode = st.sidebar.radio(
     "Choose Mode:",
-    [ "Dashboard", "Single Prediction", "Batch Prediction","About"]
+    ["Profile", "Dashboard", "Single Prediction", "Batch Prediction"]
 )
 
 # MODE ROUTING
@@ -434,39 +434,10 @@ elif mode == "Dashboard":
     - No immediate financial intervention required.
     """)
     
-elif mode == "About":
-
-    # Project Overview
-    st.title("📊 Churn Retention Optimization Project")
-
-    st.markdown("""
-        This application is a churn prediction and retention optimization dashboard 
-        built to support data-driven business decision making.
-
-        It integrates:
-        - Machine Learning prediction
-        - Financial impact simulation
-        - Retention prioritization
-        - ROI-based campaign strategy
-""")
-
-    st.divider()
-
-    st.subheader("💼 Business Impact Delivered")
-
-    st.markdown("""
-        - Identify high-risk churn customers  
-        - Quantify potential revenue exposure  
-        - Optimize retention budget allocation  
-        - Improve capital efficiency through ROI targeting  
-        - Enable proactive customer engagement  
-        - Support strategic decision making with data-driven insights
-    """)
-
-    st.divider()
-
+elif mode == "Profile":
+    
     # Profile Section
-    st.title("👤 Profil")
+    st.title("👤 Profile")
 
     st.caption("Data Analyst | Data Scientist | Business Insight Enthusiast | Data Engineering")
 
