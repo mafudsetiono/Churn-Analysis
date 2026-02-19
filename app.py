@@ -433,59 +433,131 @@ elif mode == "Dashboard":
     - Maintain service quality.
     - No immediate financial intervention required.
     """)
+    
 elif mode == "About":
 
-    st.title("👨‍💻 About This Project")
+    # Project Overview
+    st.title("📊 Churn Retention Optimization Project")
 
     st.markdown("""
-    ## 📌 Project Overview
-    This application is a churn prediction and retention optimization dashboard 
-    built to support data-driven decision making in customer retention strategy.
+        This application is a churn prediction and retention optimization dashboard 
+        built to support data-driven business decision making.
 
-    The system combines:
-    - Machine Learning prediction
-    - Financial impact simulation
-    - Retention prioritization
-    - ROI analysis
+        It integrates:
+        - Machine Learning prediction
+        - Financial impact simulation
+        - Retention prioritization
+        - ROI-based campaign strategy
+""")
+
+    st.divider()
+
+    st.subheader("💼 Business Impact Delivered")
+
+    st.markdown("""
+        - Identify high-risk churn customers  
+        - Quantify potential revenue exposure  
+        - Optimize retention budget allocation  
+        - Improve capital efficiency through ROI targeting  
+        - Enable proactive customer engagement  
+        - Support strategic decision making with data-driven insights
     """)
 
     st.divider()
 
-    st.subheader("🛠 Tech Stack")
+    # Profile Section
+    st.title("👤 Profil")
+
+    st.caption("Data Analyst | Data Scientist | Business Insight Enthusiast | Data Engineering")
+
+    col1, col2 = st.columns([1, 2])
+
+    with col1:
+        st.image(
+            "assets/Foto Nonformal.png",
+            width=220,
+            caption="Mafud Satrio Setiono"
+        )
+
+    with col2:
+        st.subheader("Halo, saya Mafud 👋")
+
+        st.markdown("""
+            Saya **Mafud Satrio Setiono**, seorang **Data Enthusiast** yang berfokus pada
+            **Data Engineering, Data Analysis, Data Science, dan Business Insight**.
+
+            Saya memiliki latar belakang **Teknik Informatika** dan pengalaman mengerjakan
+            berbagai proyek analisis data menggunakan **Python, SQL**, serta tools visualisasi
+            seperti **Tableau dan Power BI**.
+
+            Saya tertarik membangun solusi berbasis data yang **tidak hanya akurat secara teknis,
+            tetapi juga relevan untuk pengambilan keputusan bisnis**.
+        """)
+
+    # Skills Section
+    st.divider()
+    st.subheader("🛠️ Skills & Tools")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("""
+            **📊 Data & BI Tools**
+            - Tableau  
+            - Power BI  
+            - Looker
+            - Excel  
+            - Git & GitHub
+        """)
+
+    with col2:
+        st.markdown("""
+            **💻 Programming & Database**
+            - Python  
+            - PostgreSQL  
+            - MySQL
+        """)
+
+    with col3:
+        st.markdown("""
+            **🤝 Soft Skills**
+            - Problem Solving  
+            - Critical Thinking  
+            - Communication  
+            - Teamwork  
+            - Time Management  
+            - Adaptability  
+        """)
+
+    # Value Proposition
+    st.divider()
+    st.subheader("💡 What I Bring")
 
     st.markdown("""
-    - Python
-    - Scikit-learn
-    - Streamlit
-    - Pandas & NumPy
-    - Logistic Regression (Ridge Regularization)
+        - Mampu menerjemahkan data menjadi **insight yang actionable**  
+        - Fokus pada **business impact**, bukan hanya model  
+        - Terbiasa bekerja dengan **data historis & time series**  
+        - Berpikir strategis dan berbasis ROI  
+        - Berkomunikasi efektif dengan pemangku kepentingan non-teknis
     """)
 
+    # Contact Section
     st.divider()
+    st.subheader("📬 Contact & Links")
 
-    st.subheader("🎯 Business Value Delivered")
+    col1, col2 = st.columns(2)
 
-    st.markdown("""
-    - Identify high-risk churn customers
-    - Quantify potential revenue loss
-    - Prioritize economically viable interventions
-    - Optimize retention budget allocation
-    - Improve ROI-driven decision making
+    with col1:
+        st.markdown("""
+            📧 **Email**  
+            riosetiono23@gmail.com
+        """)
+
+    with col2:
+        st.markdown("""
+            🔗 **LinkedIn**  
+            [linkedin.com/in/mafud-satrio-setiono](https://www.linkedin.com/in/mafud-satrio-setiono-5950a7266/)
     """)
 
-    st.divider()
+    st.caption("Terbuka untuk peluang Data Analyst / Data Scientist ")
 
-    st.subheader("👤 Developer")
-
-    st.markdown("""
-    **Name:** Mafud Satrio  
-    **Role:** Data Analyst / Aspiring Data Scientist  
-    **Focus Area:** Predictive Modeling, Business Analytics, Decision Optimization  
-
-    This project demonstrates the integration of predictive modeling 
-    and financial analysis to support strategic business decisions.
-    """)
-
-    st.divider()
-
-    st.caption("Built with ❤️ using Streamlit")
