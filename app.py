@@ -433,3 +433,59 @@ elif mode == "Dashboard":
     - Maintain service quality.
     - No immediate financial intervention required.
     """)
+elif mode == "About":
+
+    st.title("👨‍💻 About This Project")
+
+    st.markdown("""
+    ## 📌 Project Overview
+    This application is a churn prediction and retention optimization dashboard 
+    built to support data-driven decision making in customer retention strategy.
+
+    The system combines:
+    - Machine Learning prediction
+    - Financial impact simulation
+    - Retention prioritization
+    - ROI analysis
+    """)
+
+    st.divider()
+
+    st.subheader("🛠 Tech Stack")
+
+    st.markdown("""
+    - Python
+    - Scikit-learn
+    - Streamlit
+    - Pandas & NumPy
+    - Logistic Regression (Ridge Regularization)
+    """)
+
+    st.divider()
+
+    st.subheader("🎯 Business Value Delivered")
+
+    st.markdown("""
+    - Identify high-risk churn customers
+    - Quantify potential revenue loss
+    - Prioritize economically viable interventions
+    - Optimize retention budget allocation
+    - Improve ROI-driven decision making
+    """)
+
+    st.divider()
+
+    st.subheader("👤 Developer")
+
+    st.markdown("""
+    **Name:** Mafud Satrio  
+    **Role:** Data Analyst / Aspiring Data Scientist  
+    **Focus Area:** Predictive Modeling, Business Analytics, Decision Optimization  
+
+    This project demonstrates the integration of predictive modeling 
+    and financial analysis to support strategic business decisions.
+    """)
+
+    st.divider()
+
+    st.caption("Built with ❤️ using Streamlit")
