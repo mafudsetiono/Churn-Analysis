@@ -26,7 +26,7 @@ st.sidebar.title("📌 Mode Selection")
 
 mode = st.sidebar.radio(
     "Choose Mode:",
-    ["Single Prediction", "Batch Prediction", "Dashboard"]
+    [ "Dashboard", "Single Prediction", "Batch Prediction","About"]
 )
 
 # MODE ROUTING
@@ -318,7 +318,7 @@ elif mode == "Dashboard":
     # Retention Priority
     conditions = [
         df["Net Benefit"] > 20,
-        df["Net Benefit"] > 0
+        df["Net Benefit"] > 0.5
     ]
 
     choices = [
@@ -348,6 +348,25 @@ elif mode == "Dashboard":
     col4.metric("Total Potential Saving", f"$ {total_potential_saving:,.2f}")
 
     st.divider()
+
+    priority1_customers = df[df["Retention Priority"] == "Priority 1"]
+
+    total_intervention_cost = len(priority1_customers) * intervention_cost
+    total_priority1_net = priority1_customers["Net Benefit"].sum()
+
+    if total_intervention_cost > 0:
+        roi = total_priority1_net / total_intervention_cost
+    else:
+        roi = 0
+
+
+    st.subheader("💰 Retention ROI Analysis")
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric("Customers in Priority 1", len(priority1_customers))
+    col2.metric("Total Intervention Cost", f"$ {total_intervention_cost:,.2f}")
+    col3.metric("Estimated ROI", f"{roi:.2f}x")
 
     # Risk Distribution
     st.subheader("📊 Risk Distribution")
