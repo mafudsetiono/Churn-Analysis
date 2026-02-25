@@ -359,14 +359,15 @@ elif mode == "Dashboard":
     else:
         roi = 0
 
-
     st.subheader("💰 Retention ROI Analysis")
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
 
     col1.metric("Customers in Priority 1", len(priority1_customers))
     col2.metric("Total Intervention Cost", f"$ {total_intervention_cost:,.2f}")
     col3.metric("Estimated ROI", f"{roi:.2f}x")
+    col4.metric("Net Benefit from Priority 1", f"$ {total_priority1_net:,.2f}")
+
 
     # Risk Distribution
     st.subheader("📊 Risk Distribution")
