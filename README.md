@@ -73,11 +73,15 @@ Random Forest dituning menggunakan GridSearchCV dengan fokus pada optimasi recal
 
 Clone repository:
 git clone https://github.com/mafudsetiono/Churn-Analysis.git
+
 cd repository-name
 
 Install dependencies:
+
 pip install -r requirements.txt
+
 Run Streamlit app:
+
 streamlit run app.py
 
 ## Key Insight
