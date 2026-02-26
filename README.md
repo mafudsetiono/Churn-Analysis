@@ -1,5 +1,5 @@
 # Churn Prediction & Retention Optimization Dashboard
-Proyek ini merupakan end-to-end implementasi machine learning untuk memprediksi customer churn dan mengoptimalkan strategi retensi berbasis dampak finansial.
+Project ini merupakan end-to-end implementasi machine learning untuk memprediksi customer churn dan mengoptimalkan strategi retensi berbasis dampak finansial.
 Aplikasi dibangun menggunakan Python, Scikit-learn, dan Streamlit, serta dilengkapi dengan simulasi ROI untuk membantu pengambilan keputusan bisnis.
 
 ## Business Problem
