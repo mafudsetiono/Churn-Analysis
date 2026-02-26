@@ -58,8 +58,7 @@ Random Forest dituning menggunakan GridSearchCV dengan fokus pada optimasi recal
 - Total expected loss: $7,673
 - Priority 1 customers: 61
 - Estimated ROI: 2.47x
-- Artinya:
-- Setiap $1 yang dikeluarkan untuk intervensi menghasilkan potensi return sebesar $2.47.
+- Artinya: Setiap $1 yang dikeluarkan untuk intervensi menghasilkan potensi return sebesar $2.47.
 
 ## Streamlit App Features
 - Single Customer Prediction
