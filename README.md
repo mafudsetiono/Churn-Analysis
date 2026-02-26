@@ -13,14 +13,14 @@ Tujuan proyek ini adalah:
   Menghitung estimasi ROI program retensi
 
 # Dataset Overview
-Total pelanggan: 667
-Target variable: Churn (Yes/No)
-Fitur utama:
-  International Plan
-  Voice Mail Plan
-Customer Service Calls
-Total Day Charge
-Total Evening Charge
+- Total pelanggan: 667
+- Target variable: Churn (Yes/No)
+- Fitur utama:
+    International Plan
+    Voice Mail Plan
+- Customer Service Calls
+- Total Day Charge
+- Total Evening Charge
 
 # Machine Learning Process
 1️. Data Preprocessing
