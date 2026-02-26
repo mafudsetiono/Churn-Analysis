@@ -2,7 +2,7 @@
 Proyek ini merupakan end-to-end implementasi machine learning untuk memprediksi customer churn dan mengoptimalkan strategi retensi berbasis dampak finansial.
 Aplikasi dibangun menggunakan Python, Scikit-learn, dan Streamlit, serta dilengkapi dengan simulasi ROI untuk membantu pengambilan keputusan bisnis.
 
-# Business Problem
+## Business Problem
 Customer churn menyebabkan kehilangan pendapatan berulang dan meningkatkan biaya akuisisi pelanggan baru.
 Tanpa sistem prediktif, perusahaan hanya bereaksi setelah pelanggan berhenti, bukan sebelum.
 
@@ -12,7 +12,7 @@ Tujuan proyek ini adalah:
   Mengoptimalkan strategi retensi berdasarkan dampak finansial
   Menghitung estimasi ROI program retensi
 
-# Dataset Overview
+## Dataset Overview
 - Total pelanggan: 667
 - Target variable: Churn (Yes/No)
 - Fitur utama:
@@ -22,7 +22,7 @@ Tujuan proyek ini adalah:
 - Total Day Charge
 - Total Evening Charge
 
-# Machine Learning Process
+## Machine Learning Process
 1️. Data Preprocessing
 Encoding variabel kategorikal (Yes/No → 0/1)
 Feature scaling menggunakan StandardScaler
@@ -36,32 +36,32 @@ Random Forest
 
 3️. Hyperparameter Tuning
 Random Forest dituning menggunakan GridSearchCV dengan fokus pada optimasi recall churn.
-# Final Model
-Model akhir: Random Forest (Tuned)
-Performance pada test set:
-Accuracy: 90%
-Recall (Churn): 84%
-Precision (Churn): 59%
-ROC-AUC: ~0.90
-Model ini dipilih karena memberikan keseimbangan optimal antara deteksi churn dan efisiensi biaya intervensi.
 
-# Financial Impact Simulation
-Dashboard menghitung:
-Expected Loss
-Expected Saved
-Net Benefit
-Retention Priority
-ROI Program Retensi
-Contoh hasil:
-Avg churn probability: 23%
-Total expected loss: $7,673
-Priority 1 customers: 61
-Estimated ROI: 2.47x
-Artinya:
-Setiap $1 yang dikeluarkan untuk intervensi menghasilkan potensi return sebesar $2.47.
+## Final Model
+- Model akhir: Random Forest (Tuned)
+- Performance pada test set:
+- Accuracy: 90%
+- Recall (Churn): 84%
+- Precision (Churn): 59%
+- ROC-AUC: ~0.90
+- Model ini dipilih karena memberikan keseimbangan optimal antara deteksi churn dan efisiensi biaya intervensi.
+
+## Financial Impact Simulation
+- Dashboard menghitung:
+- Expected Loss
+- Expected Saved
+- Net Benefit
+- Retention Priority
+- ROI Program Retensi
+- Contoh hasil:
+- Avg churn probability: 23%
+- Total expected loss: $7,673
+- Priority 1 customers: 61
+- Estimated ROI: 2.47x
+- Artinya:
+- Setiap $1 yang dikeluarkan untuk intervensi menghasilkan potensi return sebesar $2.47.
 
 # Streamlit App Features
-
 - Single Customer Prediction
 - Batch Prediction
 - Financial Impact Simulator
