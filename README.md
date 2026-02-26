@@ -61,7 +61,7 @@ Random Forest dituning menggunakan GridSearchCV dengan fokus pada optimasi recal
 - Artinya:
 - Setiap $1 yang dikeluarkan untuk intervensi menghasilkan potensi return sebesar $2.47.
 
-# Streamlit App Features
+## Streamlit App Features
 - Single Customer Prediction
 - Batch Prediction
 - Financial Impact Simulator
@@ -70,7 +70,7 @@ Random Forest dituning menggunakan GridSearchCV dengan fokus pada optimasi recal
 - ROI Analysis
 - Profile Page
 
-# How to Run
+## How to Run
 
 Clone repository:
 git clone https://github.com/mafudsetiono/Churn-Analysis.git
@@ -81,18 +81,18 @@ pip install -r requirements.txt
 Run Streamlit app:
 streamlit run app.py
 
-# Key Insight
+## Key Insight
 International Plan dan Customer Service Calls memiliki pengaruh signifikan terhadap churn.
 Model tuning meningkatkan recall dan menurunkan false positive.
 Strategi retensi menjadi lebih terarah dan efisien secara finansial.
 
-# Business Value
+## Business Value
 Proyek ini tidak hanya membangun model prediksi, tetapi juga:
 Menghubungkan model ke dampak finansial nyata
 Memberikan prioritas retensi berbasis ROI
 Mendukung data-driven decision making
 
-# Author
+## Author
 
 Mafud Satrio Setiono
 Data Analyst | Machine Learning | Business Insight
