@@ -59,7 +59,7 @@ if mode == "Single Prediction":
         # Encoding
         input_df["International plan"] = input_df["International plan"].map({"Yes":1, "No":0})
         input_df["Voice mail plan"] = input_df["Voice mail plan"].map({"Yes":1, "No":0})
-
+    
         # Scaling
         input_scaled = scaler.transform(input_df)
 
