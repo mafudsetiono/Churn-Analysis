@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import joblib
 import pickle as pkl
+import shap
 
 # CONFIG
 st.set_page_config(
@@ -80,10 +81,9 @@ if mode == "Single Prediction":
             color = "🔴"
 
         st.write(f"Risk Category: {color} **{risk}**")
+
         st.subheader("🔍 Model Explanation")
 
-        # Ambil coefficient
-        coefficients = model.coef_[0]
         feature_names = [
             "International plan",
             "Voice mail plan",
@@ -92,18 +92,22 @@ if mode == "Single Prediction":
             "Total eve charge"
         ]
 
-        # Hitung kontribusi tiap fitur
-        contributions = input_scaled[0] * coefficients
+        explainer = shap.TreeExplainer(model)
+        shap_values = explainer.shap_values(input_scaled)
 
-        explain_df = pd.DataFrame({
+        shap_values = np.array(shap_values)
+
+        # format kamu: (sample, feature, class)
+        impact_values = shap_values[0, :, 1]
+
+        shap_df = pd.DataFrame({
             "Feature": feature_names,
-            "Contribution": contributions
+            "Impact": impact_values
         })
 
-        # Urutkan berdasarkan pengaruh terbesar
-        explain_df = explain_df.sort_values(by="Contribution", ascending=False)
+        shap_df = shap_df.sort_values(by="Impact", ascending=False)
 
-        st.dataframe(explain_df)
+        st.dataframe(shap_df)
 
         st.subheader("📌 Smart Recommendation")
 
@@ -120,22 +124,22 @@ if mode == "Single Prediction":
             risk = "High Risk"
             st.error("Customer is high risk. Immediate retention strategy required.")
         
-        top_positive = explain_df.iloc[0]
-        top_negative = explain_df.iloc[-1]
+        top_positive = shap_df.iloc[0]
+        top_negative = shap_df.iloc[-1]
 
-        st.write("### 📌 Key Drivers:")
+        st.write("### 📌 Key Drivers")
 
         st.write(
             f"🔺 Biggest risk driver: **{top_positive['Feature']}** "
-            f"(Contribution: {top_positive['Contribution']:.3f})"
+            f"(Impact: {top_positive['Impact']:.3f})"
         )
 
         st.write(
             f"🔻 Strongest protective factor: **{top_negative['Feature']}** "
-            f"(Contribution: {top_negative['Contribution']:.3f})"
+            f"(Impact: {top_negative['Impact']:.3f})"
         )
 
-        st.bar_chart(explain_df.set_index("Feature"))
+        st.bar_chart(shap_df.set_index("Feature"))
         
         # Feature-Based Insights
         recommendations = []
